@@ -1,0 +1,16 @@
+[package]
+name = "prompt-improver"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "A CLI tool that uses Gemini to rewrite and improve prompts"
+keywords = ["gemini", "prompt", "ai", "cli"]
+categories = ["command-line-utilities"]
+
+[[bin]]
+name = "prompt-improver"
+path = "src/main.rs"
+
+[dependencies]
+gemini-client.workspace = true
+tokio.workspace = true

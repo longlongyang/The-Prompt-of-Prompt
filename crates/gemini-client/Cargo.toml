@@ -1,0 +1,28 @@
+[package]
+name = "gemini-client"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "A Rust SDK for the Google Gemini Generative Language API"
+keywords = ["gemini", "google", "ai", "llm", "api"]
+categories = ["api-bindings", "asynchronous"]
+
+[lib]
+name = "gemini_client"
+path = "src/lib.rs"
+
+[[bin]]
+name = "gemini-cli"
+path = "src/main.rs"
+
+[dependencies]
+reqwest.workspace = true
+tokio.workspace = true
+tokio-stream.workspace = true
+futures.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+base64.workspace = true
+mime.workspace = true
+

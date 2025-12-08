@@ -1,0 +1,42 @@
+# Build artifacts
+/target/
+**/*.rs.bk
+
+# Cargo lock - uncomment if this is a library
+# Cargo.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Generated prompt files (user outputs)
+improved_prompt.md
+improved_prompt_*.md
+master_prompt.md
+/docs/prompt*
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Example files (for testing)
+example.txt
+
+# Documentation build
+/docs/_build/
+
+# Merge prompt template (development only)
+merge_prompt.md

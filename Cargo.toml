@@ -1,0 +1,40 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/gemini-client",
+    "crates/prompt-improver",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/anthropics/the-prompt-of-prompt"
+authors = ["The Prompt of Prompt Contributors"]
+readme = "README.md"
+keywords = ["gemini", "google", "ai", "llm", "prompt-engineering"]
+categories = ["command-line-utilities", "api-bindings"]
+
+[workspace.dependencies]
+# HTTP client
+reqwest = { version = "0.12", features = ["json", "stream"] }
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+tokio-stream = "0.1"
+futures = "0.3"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Error handling
+thiserror = "2"
+anyhow = "1"
+
+# Utilities
+base64 = "0.22"
+mime = "0.3"
+
+# Internal crates
+gemini-client = { path = "crates/gemini-client" }

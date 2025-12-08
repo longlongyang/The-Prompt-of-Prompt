@@ -1,0 +1,54 @@
+# This workflow runs on push to `main` and on all pull requests.
+# It is simple and linear (no matrix), and built to provide fast feedback to beginners.
+name: Rust CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    # We use a single `ubuntu-latest` runner to keep the workflow easy to understand.
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository so the job can access your code.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        # Why: The workflow needs access to the repository files to run the formatting, linting, tests, and build.
+
+      # Step 2: Install a stable Rust toolchain using the modern, recommended action.
+      - name: Set up Rust (stable)
+        uses: dtolnay/rust-toolchain@stable
+        # Why: This installs a reproducible and up-to-date Rust toolchain in a way that is widely recommended.
+        # Avoid using deprecated `actions-rs` to keep your CI modern and maintained.
+
+      # Step 3: Cache dependencies to speed up subsequent workflow runs.
+      - name: Cache Cargo registry and build artifacts
+        uses: Swatinem/rust-cache@v2
+        # Why: Caching `cargo` dependencies avoids re-downloading crates on every run, saving time.
+
+      # Step 4: Check code formatting. This is the fastest check and gives quick feedback.
+      - name: Check formatting (cargo fmt)
+        run: cargo fmt -- --check
+        # What: Runs `cargo fmt` to verify code style.
+        # Why: We enforce consistent formatting early. If formatting isn't correct, stop here and fix.
+
+      # Step 5: Lint the codebase to find common mistakes and enforce idiomatic patterns.
+      - name: Run Clippy (linter)
+        run: cargo clippy -- -D warnings
+        # What: `cargo clippy` is a linter that finds stylistic and correctness issues.
+        # Why: We deny warnings to ensure the code follows idiomatic Rust practices. The job fails on warnings.
+
+      # Step 6: Run tests to ensure your code works as expected.
+      - name: Run tests (cargo test)
+        run: cargo test --all
+        # What: Executes the test suite in your repo.
+        # Why: Tests confirm the behavior of your code. Fail early when a test fails.
+
+      # Step 7: Build the project as a final verification that the code compiles.
+      - name: Build project (cargo build)
+        run: cargo build --all
+        # What: Verifies that your code compiles successfully.
+        # Why: Ensure there are no compilation issues in PRs or commits.
