@@ -155,7 +155,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     println!();
-    
+
     // Get configurable version count
     let version_count = get_version_count();
     println!("{}", i18n.improving_prompt_with_count(version_count));
@@ -269,11 +269,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Merge the prompts into a master prompt if we have at least 2
     if generated_prompts.len() >= 2 {
         println!();
-        println!("{}", i18n.merging_prompts_with_count(generated_prompts.len()));
+        println!(
+            "{}",
+            i18n.merging_prompts_with_count(generated_prompts.len())
+        );
         io::stdout().flush().ok();
 
         // Build the merge request with all prompts
-        let mut merge_input = String::from("Please synthesize these improved prompts into one optimized Master Prompt:\n\n");
+        let mut merge_input = String::from(
+            "Please synthesize these improved prompts into one optimized Master Prompt:\n\n",
+        );
         for (i, prompt) in generated_prompts.iter().enumerate() {
             merge_input.push_str(&format!("## Version {}\n{}\n\n", i + 1, prompt));
         }

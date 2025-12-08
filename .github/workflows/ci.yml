@@ -4,8 +4,14 @@ name: Rust CI
 
 on:
   push:
-    branches: [main]
+    # We now run CI on pushes to both `main` and `dev`. This helps when developing on feature branches
+    # or a `dev` branch—CI will provide feedback immediately.
+    branches: [main, dev]
   pull_request:
+    # Also run on PRs so contributor’s PR checks run on the PR target branch automatically.
+    branches: [main, dev]
+  workflow_dispatch:
+    # Allow manual invocation from the Actions tab (helpful for debugging and testing workflow changes).
 
 jobs:
   build:

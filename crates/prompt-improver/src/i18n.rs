@@ -114,10 +114,16 @@ impl I18n {
     pub fn improving_prompt_with_count(&self, count: usize) -> String {
         match self.lang {
             Language::English => {
-                format!("⏳ Improving your prompt with Gemini 3 Pro (Batch API - {} versions)...", count)
+                format!(
+                    "⏳ Improving your prompt with Gemini 3 Pro (Batch API - {} versions)...",
+                    count
+                )
             }
             Language::Chinese => {
-                format!("⏳ 正在使用 Gemini 3 Pro 优化你的提示词（Batch API - {}个版本）...", count)
+                format!(
+                    "⏳ 正在使用 Gemini 3 Pro 优化你的提示词（Batch API - {}个版本）...",
+                    count
+                )
             }
         }
     }
@@ -176,7 +182,9 @@ impl I18n {
 
     pub fn generated_versions_with_count(&self, count: usize) -> String {
         match self.lang {
-            Language::English => format!("📄 Generated {} versions of your improved prompt:", count),
+            Language::English => {
+                format!("📄 Generated {} versions of your improved prompt:", count)
+            }
             Language::Chinese => format!("📄 已生成 {} 个优化版本：", count),
         }
     }

@@ -40,3 +40,6 @@ example.txt
 
 # Merge prompt template (development only)
 merge_prompt.md
+
+# All other markdown
+*.md
